@@ -33,9 +33,20 @@ public class Main {
             }
 
             for (Map.Entry<File, Trie> entry : indexes.entrySet()) {
-                System.out.println(entry.getKey().getAbsolutePath() + ": " + entry.getValue().Contains(line));
+                System.out.println(entry.getKey().getAbsolutePath() + ": " + Search(line, entry.getValue()));
             }
         }
+    }
+
+    private static int Search(String statement, Trie trie) {
+        double found = 0;
+        String[] statementItems = statement.split("\\s+");
+        for (String statementItem : statementItems) {
+            if (trie.Contains(statementItem)) {
+                found++;
+            }
+        }
+        return (int)((found / (double)statementItems.length) * 100.0);
     }
 
     private static Trie IndexFile(File file, ITextLineExtractStrategy textLineExtractStrategy) {
