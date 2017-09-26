@@ -4,7 +4,6 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
@@ -17,7 +16,7 @@ public class Main {
 
         HashMap<File, Trie> indexes = new HashMap<>();
 
-        for (File file : ListFiles(indexableDirectory)) {
+        for (File file : Utils.ListFiles(indexableDirectory)) {
             System.out.println(file.getAbsoluteFile());
             indexes.put(file, IndexFile(file, new WordsBetweenSpaces()));
         }
@@ -78,19 +77,5 @@ public class Main {
             }
         }
         return trie;
-    }
-
-    public static ArrayList<File> ListFiles(File directory) {
-        ArrayList<File> files = new ArrayList<File>();
-
-        for (File file : directory.listFiles()) {
-            if (file.isFile()) {
-                files.add(file);
-            } else if (file.isDirectory()) {
-                files.addAll(ListFiles(file));
-            }
-        }
-
-        return files;
     }
 }
