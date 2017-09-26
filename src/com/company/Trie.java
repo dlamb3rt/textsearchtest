@@ -16,15 +16,15 @@ public class Trie {
         current.IsEnd = true; //for exact word search
     }
 
-    public boolean Contains(String search) {
-        TrieNode found = Find(search);
-        return found != null ? Find(search).IsEnd : false;
+    public boolean ContainsWord(String search) {
+        TrieNode found = FindPrefix(search);
+        return found != null ? FindPrefix(search).IsEnd : false;
     }
 
-    private TrieNode Find(String search) {
+    private TrieNode FindPrefix(String prefix) {
         TrieNode current = _root;
 
-        for (Character c : search.toCharArray()) {
+        for (Character c : prefix.toCharArray()) {
             current = current.GetChild(c);
             if (current == null) {
                 return null;

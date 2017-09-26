@@ -41,7 +41,7 @@ public class Main {
         double found = 0;
         String[] statementItems = statement.split("\\s+");
         for (String statementItem : statementItems) {
-            if (trie.Contains(statementItem)) {
+            if (trie.ContainsWord(statementItem)) {
                 found++;
             }
         }
