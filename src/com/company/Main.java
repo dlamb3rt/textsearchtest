@@ -4,7 +4,6 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.text.Normalizer;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -13,13 +12,13 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args) throws IOException { if ( args.length == 0 ) {
         throw new IllegalArgumentException(" No directory given to index.") ; }
+
         final File indexableDirectory = new File(args[0]);
 
         HashMap<File, Trie> indexes = new HashMap<>();
 
-        for (File file : listFiles(indexableDirectory)) {
+        for (File file : ListFiles(indexableDirectory)) {
             System.out.println(file.getAbsoluteFile());
-            Trie t = new Trie();
             indexes.put(file, IndexFile(file, new WordsBetweenSpaces()));
         }
 
@@ -33,12 +32,12 @@ public class Main {
             }
 
             for (Map.Entry<File, Trie> entry : indexes.entrySet()) {
-                System.out.println(entry.getKey().getAbsolutePath() + ": " + Search(line, entry.getValue()));
+                System.out.println(entry.getKey().getAbsolutePath() + ": " + SearchAndRank(line, entry.getValue()));
             }
         }
     }
 
-    private static int Search(String statement, Trie trie) {
+    private static int SearchAndRank(String statement, Trie trie) {
         double found = 0;
         String[] statementItems = statement.split("\\s+");
         for (String statementItem : statementItems) {
@@ -81,14 +80,14 @@ public class Main {
         return trie;
     }
 
-    public static ArrayList<File> listFiles(File directory) {
+    public static ArrayList<File> ListFiles(File directory) {
         ArrayList<File> files = new ArrayList<File>();
 
         for (File file : directory.listFiles()) {
             if (file.isFile()) {
                 files.add(file);
             } else if (file.isDirectory()) {
-                files.addAll(listFiles(file));
+                files.addAll(ListFiles(file));
             }
         }
 
