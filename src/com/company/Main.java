@@ -47,7 +47,7 @@ public class Main {
         return (int)((found / (double)statementItems.length) * 100.0);
     }
 
-    //Note: Is there something like IEnumerable in Java? 
+    //Note: Is there something like IEnumerable in Java?
     private static Trie IndexFile(File file, ITextLineExtractStrategy textLineExtractStrategy) {
         FileInputStream inputStream = null;
         Scanner scanner = null;

@@ -11,3 +11,4 @@ one that is for normalizing strings and one for deciding how to convert lines in
 Ideas:
 * store one trie for all files and reference the file at word ending
 * ranking, store word entry order in the trie and use to rank partial (or also full) search success
+* search and rank could be isolated
